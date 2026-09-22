@@ -65,7 +65,17 @@ const invitationData = {
     footerThanks: "Atas Kehadiran dan Doa Restunya",
     footerClosing: "Wassalamu'alaikum Warahmatullahi Wabarakatuh",
     footerFamily: "Keluarga Besar ",
-    madeBy: "Undangan Digital"
+    madeBy: "Undangan Digital",
+    senderFabLabel: "Atur Nama Penerima",
+    senderTitle: "Atur Nama Penerima",
+    senderSubtitle: "Ketik nama penerima undangan, lalu salin link yang dihasilkan. Penerima hanya melihat tampilan undangan tanpa menu ini.",
+    senderPlaceholder: "Contoh: Bapak Budi",
+    senderCopy: "Salin Link",
+    senderWa: "Kirim via WhatsApp",
+    senderNote: "Link hasil sudah berisi nama penerima untuk tampilan terpisah.",
+    senderNeedName: "Silakan isi nama penerima terlebih dahulu.",
+    senderCopied: "Link undangan untuk {nama} berhasil disalin.",
+    senderShared: "Membuka WhatsApp untuk dikirim ke {nama}..."
   }
 };
 
@@ -416,6 +426,99 @@ function installIcons() {
 }
 
 /* =========================================================
+   SENDER PANEL - atur nama penerima
+   ========================================================= */
+function initSender() {
+  const senderFab = $("#senderFab");
+  const modal = $("#senderModal");
+  const closeBtn = $("#senderClose");
+  const input = $("#senderName");
+
+  const urlParams = new URLSearchParams(location.search);
+  const isRecipient = urlParams.has("nama") && urlParams.get("nama").trim() !== "";
+  if (isRecipient) {
+    senderFab.style.display = "none"; // Tampilan penerima: tanpa menu pengaturan
+    return;
+  }
+  if (!senderFab) return;
+
+  senderFab.addEventListener("click", openSenderModal);
+  closeBtn && closeBtn.addEventListener("click", closeSenderModal);
+  modal && modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeSenderModal();
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("open")) closeSenderModal();
+  });
+  input && input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") buildSenderLink("copy");
+  });
+
+  $("#senderCopy").addEventListener("click", () => buildSenderLink("copy"));
+  $("#senderWa").addEventListener("click", () => buildSenderLink("wa"));
+
+  function openSenderModal() {
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    setTimeout(() => input.focus(), 60);
+  }
+  function closeSenderModal() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+  }
+  function getLink(name) {
+    return location.origin + location.pathname + "?nama=" + encodeURIComponent(name.trim()) + "&u=1";
+  }
+  function buildSenderLink(mode) {
+    const name = input.value.trim();
+    if (!name) { showToast(invitationData.texts.senderNeedName); input.focus(); return; }
+    const link = getLink(name);
+    const text = `${invitationData.texts.senderShared.replace("{nama}", name)}\n\n${link}`;
+    if (mode === "wa") {
+      window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank", "noopener");
+      closeSenderModal();
+    } else {
+      copyText(link).then((ok) => {
+        if (ok) {
+          showToast(invitationData.texts.senderCopied.replace("{nama}", name));
+          closeSenderModal();
+        } else {
+          showToast(invitationData.texts.senderNeedName);
+        }
+      });
+    }
+  }
+}
+
+function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text).then(() => true, () => legacyCopy(text));
+  }
+  return Promise.resolve(legacyCopy(text));
+}
+function legacyCopy(text) {
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  } catch { return false; }
+}
+
+function showToast(msg) {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+/* =========================================================
    INIT
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
@@ -434,6 +537,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initUcapan();
   initNav();
   initFab();
+  initSender();
 });
 
 function renderGalleryImages() {

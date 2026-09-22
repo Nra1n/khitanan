@@ -89,18 +89,43 @@ Cara mudah `mapPreviewUrl`: buka Google Maps, klik kanan lokasi rumah → salin 
 whatsappNumber: "6281234567890",  // Format internasional tanpa "+" dan tanpa "0" di depan
 ```
 
-## 9. Deploy ke Netlify (melalui GitHub)
+## 9. Mengirim Undangan dengan Nama Penerima Berbeda (Fitur Pengirim)
+
+Buka link utama (tanpa parameter), lalu klik tombol pensil di pojok kanan bawah (**Atur Nama Penerima**):
+
+1. Ketik nama penerima, contoh: `Bapak Budi`.
+2. Klik **Salin Link** — akan menghasilkan link khusus seperti:
+   `https://undangan-khitanan-aqikah.vercel.app/?nama=Bapak%20Budi&u=1`
+3. Tempel link itu ke WhatsApp atau pesan pribadi.
+
+**Perbedaan tampilan:**
+- **Link pengirim** (tanpa `nama=`): muncul tombol pensil untuk mengatur nama penerima.
+- **Link penerima** (dengan `nama=...`): tombol pensil/pengaturan **tidak tampil** — hanya isi undangan, cocok untuk dibagikan ke banyak orang.
+
+Alternatif tanpa tombol pensil: tempel `?nama=Nama%20Tamu` di akhir link biasa.
+
+## 10. Deploy ke Netlify (melalui GitHub)
 
 1. Push project ini ke repository GitHub.
 2. Buka [https://app.netlify.com](https://app.netlify.com) → **Add new site** → **Import an existing project**.
 3. Pilih repository Anda.
 4. Biarkan **Build command** kosong dan **Publish directory** = `.` (root), lalu **Deploy**.
 
-## 10. Deploy Cepat (Drag & Drop Folder)
+## 11. Deploy Cepat (Drag & Drop Folder)
 
 1. Buka [https://app.netlify.com/drop](https://app.netlify.com/drop).
 2. Seret **seluruh folder project ini** ke area upload.
 3. Selesai — situs langsung online. Tiap kali drag & drop lagi = update.
+
+## 12. Deploy ke Vercel (repo `Nra1n/khitanan`)
+
+1. Pastikan sudah `vercel login`.
+2. Dari folder ini jalankan `vercel --prod`, **atau** cukup push ke GitHub:
+   ```bash
+   git add . && git commit -m "Update undangan" && git push
+   ```
+   Vercel terhubung ke repo `Nra1n/khitanan` sehingga setiap push langsung ter-deploy.
+3. URL produksi: `https://undangan-khitanan-aqikah.vercel.app`
 
 ---
 
@@ -120,3 +145,4 @@ Form ucapan memakai **localStorage** (demo penyimpanan lokal di perangkat pengun
 - [ ] Musik diganti di `assets/audio/`
 - [ ] Nomor WhatsApp benar
 - [ ] `mapsUrl` & `mapPreviewUrl` menunjuk lokasi acara
+- [ ] (Opsional) Siapkan link per tamu via tombol **Atur Nama Penerima** di link pengirim
