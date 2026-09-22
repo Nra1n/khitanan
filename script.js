@@ -4,42 +4,40 @@
    ========================================================= */
 
 const invitationData = {
-  childName: "Farhan",
-  childFullName: "Muhammad Farhan",
-  eventTitle: "Tasyakuran Khitan",
-  eventDate: "09 Juli 2026",
+  childName: "Athafaris Alfarizqi",
+  childFullName: "Athafaris Alfarizqi",
+  eventTitle: "Tasyakuran Khitanan & Aqiqah",
+  eventDate: "27 September 2026",
   eventDay: "Minggu",
-  eventTime: "09.00 - 13.00 WITA",
-  eventISO: "2026-07-09T09:00:00+08:00",
+  eventTime: "10.00 WITA - Selesai",
+  eventISO: "2026-09-27T10:00:00+08:00",
 
-  fatherName: "Bapak Ahmad",
-  motherName: "Ibu Siti",
+  fatherName: "Bapak Sutrisno",
+  motherName: "Ibu Novi Anggraini",
 
-  address: "Jl. Contoh Alamat No. 123, Kelurahan Melati, Kecamatan Kota, Provinsi, 12345",
-  mapsUrl: "https://www.google.com/maps",
-  mapPreviewUrl: "https://maps.google.com/maps?q=-6.2088,106.8456&z=15&output=embed",
+  address: "Beraim, Kec. Praya Tengah",
+  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Beraim+Praya+Tengah",
+  mapPreviewUrl: "https://maps.google.com/maps?q=Beraim+Praya+Tengah&z=15&output=embed",
 
   whatsappNumber: "6281234567890",
 
-  heroImage: "assets/images/child.jpg",
+  heroImage: "assets/images/child1.jpeg",
   music: "assets/audio/music.mp3",
 
   gallery: [
-    { src: "assets/images/gallery-1.jpg", alt: "Foto dokumentasi 1" },
-    { src: "assets/images/gallery-2.jpg", alt: "Foto dokumentasi 2" },
-    { src: "assets/images/gallery-3.jpg", alt: "Foto dokumentasi 3" },
-    { src: "assets/images/gallery-4.jpg", alt: "Foto dokumentasi 4" }
+    { src: "assets/images/child1.jpeg", alt: "Foto anak" },
+    { src: "assets/images/child2.jpeg", alt: "Foto dokumentasi acara" }
   ],
 
   texts: {
-    openingLabel: "Undangan Khitanan",
+    openingLabel: "Undangan Khitanan & Aqiqah",
     openingGuest: "Kepada Yth. Bapak / Ibu / Saudara / i",
     openButton: "Buka Undangan",
-    heroLabel: "Undangan Khitan",
+    heroLabel: "Undangan Khitanan & Aqiqah",
     heroSubline: "Putra dari ",
     bismillah: "Bismillahirrahmanirrahim",
     salam: "Assalamu'alaikum Warahmatullahi Wabarakatuh",
-    sambutanBody: "Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara tasyakuran khitanan putra kami.",
+    sambutanBody: "Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara tasyakuran khitanan & aqiqah putra kami.",
     sambutanBody2: "Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada putra kami.",
     putraOf: "Putra dari",
     countdownLabel: "Menuju Hari Bahagia",
@@ -61,7 +59,7 @@ const invitationData = {
     ucapanTextPh: "Tulis ucapan dan doa untuk putra kami...",
     ucapanButton: "Kirim Ucapan",
     ucapanSaved: "Terima kasih, ucapan Anda telah kami terima.",
-    formNote: "Ucapan tersimpan di perangkat ini (demo).",
+    formNote: "Terimakasih Sudah Hadir.",
     footerThanks: "Atas Kehadiran dan Doa Restunya",
     footerClosing: "Wassalamu'alaikum Warahmatullahi Wabarakatuh",
     footerFamily: "Keluarga Besar ",
@@ -316,11 +314,13 @@ function initLightbox() {
    RSVP WHATSAPP
    ========================================================= */
 function initRsvp() {
+  const btn = $("#rsvpBtn");
+  if (!btn) return;
   const msg = `Assalamu'alaikum, saya ingin mengonfirmasi kehadiran pada acara khitanan ${invitationData.childFullName} (${invitationData.eventDay}, ${invitationData.eventDate}). Terima kasih.`;
   const link = `https://wa.me/${invitationData.whatsappNumber}?text=${encodeURIComponent(msg)}`;
-  $("#rsvpBtn").href = link;
-  $("#rsvpBtn").target = "_blank";
-  $("#rsvpBtn").rel = "noopener";
+  btn.href = link;
+  btn.target = "_blank";
+  btn.rel = "noopener";
 }
 
 /* =========================================================
