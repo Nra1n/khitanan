@@ -100,7 +100,7 @@ Buka link utama (tanpa parameter), lalu klik tombol pensil di pojok kanan bawah 
 
 **Perbedaan tampilan:**
 - **Link pengirim** (tanpa `nama=`): muncul tombol pensil untuk mengatur nama penerima.
-- **Link penerima** (dengan `nama=...`): tombol pensil/pengaturan **tidak tampil** — hanya isi undangan, cocok untuk dibagikan ke banyak orang.
+- **Link penerima** (dengan `nama=...`): tombol pensil/pengaturan **tidak tampil** — hanya isi undangan, cocok untuk dibagikan ke banyak orang. Nama penerima tampil di layar pembuka (`Kepada Yth. <nama>`) dan di bagian sambutan.
 
 Alternatif tanpa tombol pensil: tempel `?nama=Nama%20Tamu` di akhir link biasa.
 

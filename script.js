@@ -518,6 +518,34 @@ function showToast(msg) {
   showToast._t = setTimeout(() => t.classList.remove("show"), 2600);
 }
 
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[c]);
+}
+
+function renderRecipient() {
+  const params = new URLSearchParams(location.search);
+  const name = (params.get("nama") || "").trim();
+  const guestLine = $("#guestLine");
+  const guestBox = $("#guestBox");
+
+  if (name) {
+    if (guestLine) {
+      guestLine.innerHTML = `Kepada Yth. <strong>${escapeHtml(name)}</strong>`;
+    }
+    if (guestBox) {
+      const nm = guestBox.querySelector(".guest-name");
+      if (nm) nm.textContent = name;
+      guestBox.style.display = "block";
+    }
+    document.title = `${invitationData.childFullName} · Undangan Khitanan (Untuk ${name})`;
+  } else {
+    if (guestLine) guestLine.textContent = invitationData.texts.openingGuest || "";
+    if (guestBox) guestBox.style.display = "none";
+  }
+}
+
 /* =========================================================
    INIT
    ========================================================= */
@@ -526,6 +554,7 @@ document.addEventListener("DOMContentLoaded", () => {
   installIcons();
   fillBindings();
   fillCommon();
+  renderRecipient();
   renderGalleryImages();
   initOpening();
   initReveals();

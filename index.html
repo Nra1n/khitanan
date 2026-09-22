@@ -84,7 +84,7 @@
   <div class="opening-card">
     <img class="ornament" src="assets/ornaments/top-ornament.svg" alt="Ornamen atas">
     <p class="label" data-bind="texts.openingLabel">Undangan Khitanan</p>
-    <p class="guest-line" data-bind="texts.openingGuest">Kepada Yth. Bapak / Ibu / Saudara / i</p>
+    <p class="guest-line" id="guestLine"></p>
     <h1 data-bind="childName">Farhan</h1>
     <p class="event-date" data-bind="eventDate">09 Juli 2026</p>
     <div class="opening-wrap">
@@ -122,6 +122,11 @@
       <p class="bismillah reveal" data-bind="texts.bismillah">Bismillahirrahmanirrahim</p>
       <h2 class="salam-open reveal" data-bind="texts.salam">Assalamu'alaikum Warahmatullahi Wabarakatuh</h2>
       <p class="body reveal" data-bind="texts.sambutanBody">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara tasyakuran khitanan putra kami.</p>
+      <div class="guest-box reveal in" id="guestBox" style="display:none">
+        <div class="g-label">Kepada Yth.</div>
+        <div class="g-name guest-name"></div>
+        <div class="g-sub">Bapak / Ibu / Saudara i</div>
+      </div>
       <div class="name-big reveal" data-delay="1">
         <small data-bind="texts.eventTitle">Tasyakuran Khitan</small>
         <span data-bind="childFullName">Muhammad Farhan</span>

@@ -818,6 +818,49 @@ section + section { border-top: 1px dashed var(--line-soft); }
 }
 .fab:hover .tooltip { opacity: 1; visibility: visible; transform: translateY(-50%) translateX(0); transition-delay: .15s; }
 
+.guest-line { display: block; }
+.guest-line strong {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(24px, 7vw, 30px);
+  color: var(--brown-ink);
+  margin-top: 5px;
+  font-style: normal;
+  letter-spacing: 0.5px;
+  word-break: break-word;
+}
+.guest-box {
+  background: linear-gradient(160deg, #fbf3dc, #f3e7c6);
+  border: 1.5px dashed var(--gold);
+  border-radius: 14px;
+  padding: 16px 14px;
+  margin: 0 auto 20px;
+  max-width: 320px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.guest-box .g-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.guest-box .g-name {
+  font-family: var(--serif);
+  font-size: clamp(24px, 7vw, 30px);
+  color: var(--brown-ink);
+  font-weight: 700;
+  margin: 4px 0 2px;
+  word-break: break-word;
+}
+.guest-box .g-sub {
+  font-family: var(--corm);
+  font-size: 15px;
+  font-style: italic;
+  color: var(--brown-soft);
+}
+
 /* =========================================================
    SENDER MODAL + TOAST
    ========================================================= */
