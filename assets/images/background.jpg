@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 980" role="img" aria-label="Background texture">
+  <defs>
+    <filter id="n">
+      <feTurbulence baseFrequency="0.9" numOctaves="2" type="fractalNoise" seed="7"/>
+      <feColorMatrix values="0 0 0 0 0.55 0 0 0 0 0.42 0 0 0 0 0.22 0 0 0 0.05 0"/>
+    </filter>
+    <radialGradient id="vig" cx="0.5" cy="0.5" r="0.75">
+      <stop stop-color="#0000" offset="0.6"/>
+      <stop stop-color="#5b4a2699" offset="1"/>
+    </radialGradient>
+  </defs>
+  <rect width="480" height="980" fill="#efe3c4"/>
+  <rect width="480" height="980" filter="url(#n)" opacity="0.5"/>
+  <rect width="480" height="980" fill="url(#vig)"/>
+  <g stroke="#8f7237" stroke-width="2.4" fill="none" opacity="0.4">
+    <path d="M-20 300 C 30 260 90 260 140 300 C 190 340 250 340 300 300 C 350 260 410 260 460 300"/>
+    <path d="M-20 400 C 40 360 120 360 180 410 C 240 460 320 460 380 410 C 420 380 450 390 460 420"/>
+  </g>
+  <circle cx="60" cy="900" r="120" stroke="#8f7237" stroke-width="1.6" opacity="0.25"/>
+  <circle cx="60" cy="900" r="90" stroke="#8f7237" stroke-width="1" stroke-dasharray="2 6" opacity="0.25"/>
+  <circle cx="430" cy="120" r="90" stroke="#8f7237" stroke-width="1.6" opacity="0.2"/>
+</svg>
