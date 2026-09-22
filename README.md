@@ -32,8 +32,8 @@ npx serve .
 Buka `script.js`, ubah pada object `invitationData` bagian atas:
 
 ```js
-childName: "Farhan",
-childFullName: "Muhammad Farhan",
+childName: "Athafaris Alfarizqi",
+childFullName: "Athafaris Alfarizqi",
 ```
 
 ## 3. Mengganti Tanggal / Hari / Waktu Acara
@@ -41,10 +41,10 @@ childFullName: "Muhammad Farhan",
 Di `invitationData`:
 
 ```js
-eventDate: "09 Juli 2026",   // Tanggal yang tampil
+eventDate: "27 September 2026",   // Tanggal yang tampil
 eventDay: "Minggu",          // Hari yang tampil
-eventTime: "09.00 - 13.00 WITA",
-eventISO: "2026-07-09T09:00:00+08:00",  // Untuk countdown (harus format ISO, +08:00 = WITA)
+eventTime: "10.00 WITA - Selesai",
+eventISO: "2026-09-27T10:00:00+08:00",  // Untuk countdown (harus format ISO, +08:00 = WITA)
 ```
 
 ## 4. Mengganti Foto
@@ -53,10 +53,10 @@ Ganti file foto asli Anda, dengan nama yang sama, di folder `assets/images/`:
 
 | File              | Fungsinya                        |
 |-------------------|----------------------------------|
-| `child.jpg`       | Foto anak (hero & profil)        |
+| `child1.jpeg`     | Foto anak (hero)                 |
+| `child2.jpeg`     | Foto anak (profil)               |
 | `hero.jpg`        | Banner dekoratif                 |
 | `background.jpg`  | Tekstur background               |
-| `gallery-1.jpg` s/d `gallery-4.jpg` | Foto galeri |
 
 Tidak perlu ubah kode — cukup timpa filenya (format JPG/PNG/WebP).
 

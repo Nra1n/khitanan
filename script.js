@@ -16,18 +16,13 @@ const invitationData = {
   motherName: "Ibu Novi Anggraini",
 
   address: "Beraim, Kec. Praya Tengah",
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Beraim+Praya+Tengah",
-  mapPreviewUrl: "https://maps.google.com/maps?q=Beraim+Praya+Tengah&z=15&output=embed",
+  mapsUrl: "https://maps.app.goo.gl/PaYdkvm9xDtQuzVS8",
+  mapPreviewUrl: "<iframe src=\"https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3943.8450119923086!2d116.33989097501508!3d-8.706264391342772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwNDInMjIuNiJTIDExNsKwMjAnMzIuOSJF!5e0!3m2!1sen!2sid!4v1790077784691!5m2!1sen!2sid\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"strict-origin-when-cross-origin\"></iframe>",
 
   whatsappNumber: "6281234567890",
 
   heroImage: "assets/images/child1.jpeg",
   music: "assets/audio/music.mp3",
-
-  gallery: [
-    { src: "assets/images/child1.jpeg", alt: "Foto anak" },
-    { src: "assets/images/child2.jpeg", alt: "Foto dokumentasi acara" }
-  ],
 
   texts: {
     openingLabel: "Undangan Khitanan & Aqiqah",
@@ -53,7 +48,6 @@ const invitationData = {
     rsvpNote: "Mohon konfirmasi kehadiran Anda untuk memudahkan kami mempersiapkan acara. Terima kasih.",
     rsvpButton: "Konfirmasi via WhatsApp",
     mapsButton: "Buka Google Maps",
-    galeriTitle: "Gallery",
     ucapanTitle: "Kirim Ucapan & Doa",
     ucapanNamePh: "Nama Anda",
     ucapanTextPh: "Tulis ucapan dan doa untuk putra kami...",
@@ -98,9 +92,9 @@ function fillBindings() {
 }
 
 function fillCommon() {
-  $("title").textContent = `Undangan Khitanan ${invitationData.childFullName}`;
-  setMeta("description", `Kami mengundang Bapak/Ibu/Saudara/i dalam acara tasyakuran khitanan ${invitationData.childFullName}. ${invitationData.eventDay}, ${invitationData.eventDate} pukul ${invitationData.eventTime}.`);
-  setMeta("og:title", `Undangan Khitanan ${invitationData.childFullName}`);
+  $("title").textContent = `Undangan Khitanan & Aqiqah ${invitationData.childFullName}`;
+  setMeta("description", `Kami mengundang Bapak/Ibu/Saudara/i dalam acara tasyakuran khitanan & aqiqah ${invitationData.childFullName}. ${invitationData.eventDay}, ${invitationData.eventDate} pukul ${invitationData.eventTime}.`);
+  setMeta("og:title", `Undangan Khitanan & Aqiqah ${invitationData.childFullName}`);
   setMeta("og:description", `${invitationData.eventTitle} - ${invitationData.eventDate}`);
   setMeta("og:image", invitationData.heroImage);
   setMeta("og:url", location.href);
@@ -228,9 +222,10 @@ function initCountdown() {
    ========================================================= */
 function initMaps() {
   const frame = $("#mapFrame");
-  if (invitationData.mapPreviewUrl) {
+  const preview = normalizeMapPreview(invitationData.mapPreviewUrl);
+  if (preview) {
     frame.innerHTML = `<iframe
-      src="${invitationData.mapPreviewUrl}"
+      src="${preview}"
       title="Denah lokasi acara" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>`;
   } else {
     frame.innerHTML = `
@@ -246,68 +241,14 @@ function initMaps() {
   $("#mapsBtn").rel = "noopener";
 }
 
-/* =========================================================
-   GALERI + LIGHTBOX
-   ========================================================= */
-let lbIndex = 0;
-
-function initGallery() {
-  const grid = $("#galleryGrid");
-  grid.innerHTML = "";
-  invitationData.gallery.forEach((img, i) => {
-    const fig = document.createElement("figure");
-    fig.className = "reveal";
-    fig.dataset.delay = (i % 2) + 1;
-    fig.setAttribute("aria-label", `Buka foto ${img.alt}`);
-    fig.tabIndex = 0;
-    const imgEl = document.createElement("img");
-    imgEl.src = img.src;
-    imgEl.alt = img.alt;
-    imgEl.loading = "lazy";
-    imgEl.addEventListener("click", () => openLightbox(i));
-    fig.appendChild(imgEl);
-    fig.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(i); }
-    });
-    grid.appendChild(fig);
-  });
-}
-
-function openLightbox(i) {
-  lbIndex = i;
-  const item = invitationData.gallery[lbIndex];
-  $("#lbImg").src = item.src;
-  $("#lbImg").alt = item.alt;
-  $("#lightbox").classList.add("open");
-  document.body.classList.add("locked");
-  $("#lbClose").focus();
-}
-
-function closeLightbox() {
-  $("#lightbox").classList.remove("open");
-  document.body.classList.remove("locked");
-}
-
-function stepLightbox(dir) {
-  lbIndex = (lbIndex + dir + invitationData.gallery.length) % invitationData.gallery.length;
-  const item = invitationData.gallery[lbIndex];
-  $("#lbImg").src = item.src;
-  $("#lbImg").alt = item.alt;
-}
-
-function initLightbox() {
-  $("#lbClose").addEventListener("click", closeLightbox);
-  $("#lbPrev").addEventListener("click", () => stepLightbox(-1));
-  $("#lbNext").addEventListener("click", () => stepLightbox(1));
-  $("#lightbox").addEventListener("click", (e) => {
-    if (e.target === $("#lightbox") || e.target.tagName === "IMG") closeLightbox();
-  });
-  window.addEventListener("keydown", (e) => {
-    if (!$("#lightbox").classList.contains("open")) return;
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") stepLightbox(-1);
-    if (e.key === "ArrowRight") stepLightbox(1);
-  });
+function normalizeMapPreview(preview) {
+  if (!preview) return "";
+  const trimmed = String(preview).trim();
+  if (trimmed.toLowerCase().startsWith("<iframe")) {
+    const m = trimmed.match(/src=["']([^"']+)["']/i);
+    return m ? m[1] : "";
+  }
+  return trimmed;
 }
 
 /* =========================================================
@@ -391,7 +332,7 @@ function initNav() {
       if (en.isIntersecting) setActiveNav(en.target.id);
     });
   }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-  ["home", "acara", "galeri", "ucapan", "maps"].forEach((id) => {
+  ["home", "acara", "ucapan", "maps"].forEach((id) => {
     const el = document.getElementById(id);
     if (el) io.observe(el);
   });
@@ -539,7 +480,7 @@ function renderRecipient() {
       if (nm) nm.textContent = name;
       guestBox.style.display = "block";
     }
-    document.title = `${invitationData.childFullName} · Undangan Khitanan (Untuk ${name})`;
+    document.title = `${invitationData.childFullName} · Undangan Khitanan & Aqiqah (Untuk ${name})`;
   } else {
     if (guestLine) guestLine.textContent = invitationData.texts.openingGuest || "";
     if (guestBox) guestBox.style.display = "none";
@@ -555,24 +496,13 @@ document.addEventListener("DOMContentLoaded", () => {
   fillBindings();
   fillCommon();
   renderRecipient();
-  renderGalleryImages();
   initOpening();
   initReveals();
   initCountdown();
   initMaps();
-  initGallery();
-  initLightbox();
   initRsvp();
   initUcapan();
   initNav();
   initFab();
   initSender();
 });
-
-function renderGalleryImages() {
-  const imgs = $$("img[data-src]");
-  imgs.forEach((img) => {
-    img.src = img.dataset.src;
-    delete img.dataset.src;
-  });
-}
