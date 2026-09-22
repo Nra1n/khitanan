@@ -22,6 +22,7 @@ const invitationData = {
   whatsappNumber: "6281234567890",
 
   heroImage: "assets/images/child1.jpeg",
+  profilImage: "assets/images/child2.jpeg",
   music: "assets/audio/music.mp3",
 
   texts: {

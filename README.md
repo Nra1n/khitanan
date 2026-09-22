@@ -53,8 +53,8 @@ Ganti file foto asli Anda, dengan nama yang sama, di folder `assets/images/`:
 
 | File              | Fungsinya                        |
 |-------------------|----------------------------------|
-| `child1.jpeg`     | Foto anak (hero)                 |
-| `child2.jpeg`     | Foto anak (profil)               |
+| `child1.jpeg`     | Foto anak (hero — config `heroImage`) |
+| `child2.jpeg`     | Foto anak (profil — config `profilImage`) |
 | `hero.jpg`        | Banner dekoratif                 |
 | `background.jpg`  | Tekstur background               |
 
